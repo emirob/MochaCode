@@ -18,7 +18,8 @@ namespace ConsoleApp1
 
                 if (hasMoreThen3)
                     Console.WriteLine(i);
-               
+
+                Console.WriteLine("emi");
                 
             }
             
