@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ConsoleApp1
 {
     class Program
     {
+        private static string LOGGER_PATH =     "c:"+Path.DirectorySeparatorChar+"emi"
+                                                + Path.DirectorySeparatorChar +"emilogger.txt";
         static void Main(string[] args)
         {
-            List<Util> myList = new List<Util>();
-            bool hasMoreThen3 = false;
-            for (int i = 0; i < 10; i++)
+            EmiLogger emi = new EmiLogger(LOGGER_PATH);
+            emi.Write(DateTime.Now + " system started");
+            string[] lines = emi.Read;
+            for (int i = 0; i < lines.Length; i++)
             {
-                hasMoreThen3 = myList != null && myList.Count > 3;
-                Util u = new Util(new Param() { height = 1.76f, width = 77.3f });
-                myList.Add(u);
-
-                if (hasMoreThen3)
-                    Console.WriteLine(i);
-
-                Console.WriteLine("emi");
-                
+                Console.WriteLine(lines[i]);
             }
-            
         }
     }
 }
