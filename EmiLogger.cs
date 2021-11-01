@@ -18,13 +18,13 @@ namespace ConsoleApp1
         }
         public bool Write(string msg)
         {
-            StreamWriter sw = null;
-
             try
             {
-                using (sw = new StreamWriter(this.path, true))
+                using (StreamWriter sw = new StreamWriter(this.path, true))
                 {
                     sw.WriteLine(msg);
+                    sw.Flush();
+                    sw.Close();
                 }
             }
             catch (Exception e)
@@ -44,11 +44,12 @@ namespace ConsoleApp1
 
                 try
                 {
-                    
-                    StreamReader sr = new StreamReader(this.path);
-                    while (sr.EndOfStream != true)
+                    using (StreamReader sr = new StreamReader(this.path))
                     {
-                        lines.Add(sr.ReadLine());
+                        while (sr.EndOfStream != true)
+                        {
+                            lines.Add(sr.ReadLine());
+                        }
                     }
                 }
                 catch (Exception e)
